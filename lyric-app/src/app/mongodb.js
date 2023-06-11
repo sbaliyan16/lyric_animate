@@ -1,20 +1,23 @@
 const { MongoClient } = require('mongodb');
 
-async function main() {
-    const uri = "mongodb+srv://shubhankarbaliyan16:Shubhsoccer7>@cluster0.8pwssvw.mongodb.net/?retryWrites=true&w=majority";
-    
-    const client = new MongoClient(uri);
+let client = null;
 
-    try {
-        // Connect to the MongoDB cluster
-        await client.connect();
+async function connectToDatabase() {
+  if (client) {
+    return client;
+  }
 
-        // Make the appropriate DB calls
+  const uri = "mongodb+srv://shubhankarbaliyan16:3D6iazB0kbPfvR2Z@cluster0.m1m6khz.mongodb.net/?retryWrites=true&w=majority";
+  client = new MongoClient(uri);
 
-    } finally {
-        // Close the connection to the MongoDB cluster
-        await client.close();
-    }
+  try {
+    await client.connect();
+    console.log('Connected to the MongoDB cluster');
+    return client;
+  } catch (error) {
+    console.error('Error connecting to the MongoDB cluster:', error);
+    throw error;
+  }
 }
 
-main().catch(console.error);
+module.exports = { connectToDatabase };

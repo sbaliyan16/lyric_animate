@@ -1,10 +1,10 @@
 import styles from './page.module.css'
-import Login from './login'
+import LoginClient from './loginclient'
 
 export default function LoginPage() {
     return (
         <div className={styles.main}>
-            <Login/>
+            <LoginClient/>
         </div>
     );
 }
